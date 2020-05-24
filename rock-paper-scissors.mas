@@ -1,0 +1,232 @@
+//example() indicates functions in comments
+
+//Asks for Player1(X) and Player2(Y)'s input, 1=Rock, 2=Paper, 3=Scissors
+loop,	Input
+		Store X
+		Input
+		Store Y
+        
+//If X and Y both have the same input, result in a draw.
+Draw, Load Y
+	  Subt X
+      Skipcond 400 /If A=0, then DRAW
+      Jump NotDraw /Else, NotDraw
+	  Jump drawx
+
+//If X and Y have different inputs, calculate the winner.
+NotDraw, Load Y
+		 Subt two
+		 Skipcond 800 /If AC>1 (Scissors), Continue to Scissors function
+		 Jump NotScissors /Else Jump to NotScissors().
+         Jump Scissors
+ 
+          
+NotScissors, Load notscissorsx /Load notscissorx = 2
+			 Subt Y
+			 Skipcond 400 /If 2-2 AC=0, then Jump to Paper().
+             Jump Rock /Else if 2-1 AC>1, then Jump to Rock().
+ 			 Jump Paper
+             
+Scissors, Load scissorsx /load scissorsx = 1
+		  Subt X /1(Scissors) minus 1(Rock), 2(Paper)
+		  Skipcond 0 /If AC<0 (Scissors>Paper) then Jump to P2Win().
+		  Jump P1Win /Else, (Scissors<Rock) Jump to P1Win().
+		  Jump P2Win
+             
+Paper, Load paperx /load paperx = 2
+	   Subt X /2(Paper) minus 1(Rock)=1, 3(Scissors)=-1
+       Skipcond 800 /If AC>1 (Paper<Rock) then Jump to P1Win().
+       Jump P1Win /Else, (Paper<Scissors) Jump P2Win().
+       Jump P2Win
+       
+Rock, Load rockx /loads Player 2 option as rockx = 2
+	  Subt X /2(Rock) minus 2(Paper)=0, 3(Scissors)=-1
+      Skipcond 400 /If AC=0 (Rock<Paper), then Jump to P1Win().
+      Jump P2Win /Else, (Rock>Scissors), Jump to P2Win
+      Jump P1Win
+      
+//Prompts user if they want to continue playing.              
+Repeat, Load newline
+		Output
+		Load C
+		Output
+		Load o
+        Output
+        Load n
+        Output
+        Load t
+        Output
+        Load i
+        Output
+        Load n
+        Output
+        Load u
+        Output
+        Load e
+        Output
+        Load questionmark
+        Output
+        Load space
+        Output
+        Load leftparenthesis
+        Output
+        Load onex
+        Output
+        Load equals
+        Output
+        Load y
+        Output
+        Load e
+        Output
+        Load s
+        Output
+        Load rightparenthesis
+        Output
+        Load newline
+		Output
+        Load newline
+        Output
+       	Input
+        Store Z
+        Subt one
+        Skipcond 400 /If 1(Yes), then 1-1 A=0, then Jump to loop
+		Jump End /Otherwise, jump to the End screen
+        Jump loop
+        
+P1Win,  Load cP
+		Output
+        Load onex
+        Output
+        Load space
+        Output
+		Load cW
+        Output
+        Load o
+        Output
+        Load n
+        Output        
+        Jump Repeat
+
+P2Win,  Load cP
+		Output
+        Load twox
+        Output
+        Load space
+        Output
+		Load cW
+        Output
+        Load o
+        Output
+        Load n
+        Output 
+        Jump Repeat
+             
+drawx, Load D
+	   Output
+	   Load r
+       Output
+       Load a
+       Output
+       Load w
+	   Output
+	   Jump Repeat
+             
+End, Load newline
+	 Output
+	 Load T
+	 Output
+     Load h
+     Output
+     Load a
+     Output
+	 Load n
+     Output
+     Load k
+     Output
+     Load space
+     Output
+     Load cY
+     Output
+     Load o
+     Output
+     Load u
+     Output
+     Load space
+     Output
+	 Load cF
+     Output
+     Load o
+     Output
+     Load r
+     Output
+     Load space
+     Output
+     Load cP
+     Output
+     Load l
+     Output
+     Load a
+     Output
+     Load y
+     Output
+     Load i
+     Output
+	 Load n
+     Output
+     Load g
+     Output
+     Load exclamation
+     Output
+     Load newline
+     halt
+      
+
+
+//Constants, x-stands for string version, cW for capital W
+
+       
+cP, dec 80
+onex, dec 49
+twox, dec 50
+W, dec 87
+o, dec 111
+n, dec 110
+space, dec 32
+D, dec 68
+C, dec 67
+t, dec 116
+i, dec 105
+u, dec 117
+e, dec 101
+y, dec 121
+s, dec 115
+T, dec 84
+r, dec 114
+a, dec 97
+w, dec 119
+cW, dec 87
+h, dec 104
+k, dec 107
+cY, dec 89
+cF, dec 70
+l, dec 108
+g, dec 103
+P, dec 112
+exclamation, dec 33
+questionmark, dec 63
+leftparenthesis, dec 91
+rightparenthesis, dec 93
+equals, dec 61
+newline, dec 10
+
+paperx, dec 2
+scissorsx, dec 1
+notscissorsx, dec 2
+rockx, dec 2
+userinput, dec 0
+
+one, dec 1
+two, dec 2
+X, dec 0
+Y, dec 0
+Z, dec 0
